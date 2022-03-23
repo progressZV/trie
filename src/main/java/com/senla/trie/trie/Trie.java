@@ -2,42 +2,61 @@ package com.senla.trie.trie;
 
 import com.senla.trie.node.TrieNode;
 
-public class Trie {
 
-	private final TrieNode trieNodeRoot;
+public class Trie implements AbstractTrie {
 
-	public Trie() {
-		this.trieNodeRoot = new TrieNode();
-	}
+    private final TrieNode trieNodeRoot;
 
-	public void insert(String word) {
-		TrieNode currentTrieNode = this.trieNodeRoot;
-		for (int i = 0; i < word.length(); i++) {
-			char letter = word.charAt(i);
-			TrieNode nextTrieNode = currentTrieNode.getNodeMap().get(letter);
-			if (nextTrieNode == null) {
-				nextTrieNode = new TrieNode();
-				currentTrieNode.getNodeMap().put(letter, nextTrieNode);
-			}
-			currentTrieNode = nextTrieNode;
-		}
-		currentTrieNode.setWord(true);
-	}
+    public Trie() {
+        this.trieNodeRoot = new TrieNode();
+    }
 
-	public int wordCount(TrieNode trieNodeRoot) {
+    public TrieNode getTrieNodeRoot() {
+        return trieNodeRoot;
+    }
 
-		int result = 0;
+    public void insert(String word) {
+        TrieNode currentTrieNode = this.trieNodeRoot;
+        for (int i = 0; i < word.length(); i++) {
+            char letter = word.charAt(i);
+            TrieNode nextTrieNode = currentTrieNode.getNodeMap().get(letter);
+            if (nextTrieNode == null) {
+                nextTrieNode = new TrieNode();
+                currentTrieNode.getNodeMap().put(letter, nextTrieNode);
+            }
+            currentTrieNode = nextTrieNode;
+        }
+        currentTrieNode.setWord(true);
+        currentTrieNode.setCounter(currentTrieNode.getCounter() + 1);
+    }
 
-		if (trieNodeRoot.isWord()) {
-			result++;
-		}
+    public int getWordCount(String word){
+        TrieNode currentTrieNode = this.trieNodeRoot;
+        for(int i = 0; i< word.length(); i++){
+            char letter = word.charAt(i);
+            TrieNode nextTrieNode = currentTrieNode.getNodeMap().get(letter);
+            if(nextTrieNode == null){
+                return 0;
+            }
+            currentTrieNode = nextTrieNode;
+        }
+        return currentTrieNode.getCounter();
+    }
 
-		for (char i = 'a'; i <= 'z'; i++) {
-			TrieNode childrenNode = trieNodeRoot.getNodeMap().get(i);
-			if (childrenNode != null) {
-				result += wordCount(childrenNode);
-			}
-		}
-		return result;
-	}
+    public int getTextWords(TrieNode trieNodeRoot) {
+
+        int result = 0;
+
+        if (trieNodeRoot.isWord()) {
+            result++;
+        }
+
+        for (char i : trieNodeRoot.getNodeMap().keySet()) {
+            TrieNode childrenNode = trieNodeRoot.getNodeMap().get(i);
+            result += getTextWords(childrenNode);
+        }
+        return result;
+    }
+
+
 }

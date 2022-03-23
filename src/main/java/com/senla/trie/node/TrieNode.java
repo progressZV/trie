@@ -5,12 +5,13 @@ import java.util.Map;
 
 public class TrieNode {
 
-	Map<Character, TrieNode> nodeMap;
-	boolean isWord;
+	private final Map<Character, TrieNode> nodeMap;
+	private boolean isWord;
+	private int counter;
 
 	public TrieNode(){
-		 this.nodeMap = new HashMap<>();
-	 }
+		this.nodeMap = new HashMap<>();
+	}
 
 	public Map<Character, TrieNode> getNodeMap() {
 		return nodeMap;
@@ -18,6 +19,14 @@ public class TrieNode {
 
 	public boolean isWord() {
 		return isWord;
+	}
+
+	public int getCounter() {
+		return counter;
+	}
+
+	public void setCounter(int counter) {
+		this.counter = counter;
 	}
 
 	public void setWord(boolean word) {
