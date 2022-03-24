@@ -3,22 +3,26 @@ package com.senla.trie.runner;
 import com.senla.trie.trie.Trie;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Runner {
 
-    public Trie getWordsFromFile() throws IOException {
+    public Trie getWordsFromFile(String filePath) {
         Trie trie = new Trie();
         String word;
 
-        try (FileReader fileReader = new FileReader("The Hunger Games.txt");
+        try (FileReader fileReader = new FileReader(filePath);
              BufferedReader bufferedReader = new BufferedReader(fileReader)){
             while((word = bufferedReader.readLine()) != null){
                 String[] words = word.split("[ \\.,!?]+");
                 for (String s : words) trie.insert(s.toLowerCase());
             }
+        }
+        catch (IOException e) {
+            throw new RuntimeException("File not found.");
         }
 
 /*        Path path = Paths.get("words.txt");

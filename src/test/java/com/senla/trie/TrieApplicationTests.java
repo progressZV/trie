@@ -65,7 +65,7 @@ class TrieApplicationTests {
 		// Input keys (use only 'a' through 'z'
 		// and lower case)
 		String[] keys = {"the", "a", "there", "answer",
-			"any", "by", "bye", "their"};
+			"any", "by", "bye", "their", "a"};
 
 		root = new TrieNode();
 

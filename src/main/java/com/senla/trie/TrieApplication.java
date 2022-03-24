@@ -10,7 +10,10 @@ public class TrieApplication {
 
 	public static void main(String[] args) throws IOException {
 		Runner runner = new Runner();
-		Trie trie = runner.getWordsFromFile();
+		if(args.length == 0){
+			throw new RuntimeException("You did not specify the path to the file");
+		}
+		Trie trie = runner.getWordsFromFile(args[0]);
 		runner.getAllWordsInText(trie);
 		runner.getWordCount(trie);
 	}
