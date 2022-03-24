@@ -6,7 +6,6 @@ import java.util.Map;
 public class TrieNode {
 
 	private final Map<Character, TrieNode> nodeMap;
-	private boolean isWord;
 	private int counter;
 
 	public TrieNode(){
@@ -17,19 +16,11 @@ public class TrieNode {
 		return nodeMap;
 	}
 
-	public boolean isWord() {
-		return isWord;
-	}
-
 	public int getCounter() {
 		return counter;
 	}
 
 	public void setCounter(int counter) {
 		this.counter = counter;
-	}
-
-	public void setWord(boolean word) {
-		isWord = word;
 	}
 }

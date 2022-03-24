@@ -26,7 +26,6 @@ public class Trie implements AbstractTrie {
             }
             currentTrieNode = nextTrieNode;
         }
-        currentTrieNode.setWord(true);
         currentTrieNode.setCounter(currentTrieNode.getCounter() + 1);
     }
 
@@ -47,14 +46,13 @@ public class Trie implements AbstractTrie {
 
         int result = 0;
 
-        if (trieNodeRoot.isWord()) {
-            result++;
-        }
-
         for (char i : trieNodeRoot.getNodeMap().keySet()) {
             TrieNode childrenNode = trieNodeRoot.getNodeMap().get(i);
             result += getTextWords(childrenNode);
         }
+        result += trieNodeRoot.getCounter();
+
+
         return result;
     }
 
